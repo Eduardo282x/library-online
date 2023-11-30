@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Users } from './components/Users/Users';
 import { Books } from './components/Books/Books';
 import { Reserve } from './components/Reserve/Reserve';
+import { Thesis } from './components/Thesis/Thesis';
 import './App.css'
 
 function App() {
@@ -31,6 +32,10 @@ function App() {
           element: <Reserve/>
         },
         {
+          path: "/thesis",
+          element: <Thesis/>
+        },
+        {
           path: "/users",
           element: <Users/>
         },
@@ -39,7 +44,9 @@ function App() {
   ]);
 
   return (
-    <RouterProvider router={router}/>
+    <div className="appBack">
+      <RouterProvider router={router}/>
+    </div>
   )
 }
 

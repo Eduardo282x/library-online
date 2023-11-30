@@ -21,6 +21,7 @@ import BookIcon from '@mui/icons-material/Book';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import ArticleIcon from '@mui/icons-material/Article';
 import './layout.css'
 
 const drawerWidth = 200;
@@ -112,25 +113,32 @@ export const Layout = () => {
         if(menu == 'Usuarios'){
             return <PeopleAltIcon/>
         }
+        if(menu == 'Tesis'){
+            return <ArticleIcon/>
+        }
     }
 
     const menu = [
         {
-        title:'Inicio',
-        redirect: '/home'
+            title:'Inicio',
+            redirect: '/home'
         },
         {
-        title:'Libros',
-        redirect: '/books'
+            title:'Libros',
+            redirect: '/books'
         },
         {
-        title:'Reservar',
-        redirect: '/reserve'
+            title:'Reservar',
+            redirect: '/reserve'
         },
         {
-        title:'Usuarios',
-        redirect: '/users'
-        }
+            title:'Tesis',
+            redirect: '/thesis'
+        },
+        {
+            title:'Usuarios',
+            redirect: '/users'
+        },
     ];
 
     const handleDrawerOpen = () => {
@@ -143,60 +151,59 @@ export const Layout = () => {
 
     return (
         <div>
-        <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-            <AppBar position="fixed" open={open} >
-            <Toolbar className="woodColor">
-                <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                sx={{marginRight: 5,...(open && { display: "none" }),}}
-                >
-                <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" noWrap component="div">
-                    Biblioteca Online
-                </Typography>
-            </Toolbar>
-            </AppBar>
-            <Drawer variant="permanent" open={open}>
-            <DrawerHeader className="woodColor">
-                <IconButton onClick={handleDrawerClose}>
-                {theme.direction === "rtl" ? (
-                    <ChevronRightIcon />
-                ) : (
-                    <ChevronLeftIcon />
-                )}
-                </IconButton>
-            </DrawerHeader>
-            <Divider />
-                <List className="woodColorMenu">
-                    {menu.map((text, index) => (
-                    <ListItem key={index} disablePadding sx={{ display: "block" }} onClick={() => redirecTo(text.redirect)}>
-                        <ListItemButton
-                        sx={{minHeight: 48,justifyContent: open ? "initial" : "center",px: 2.5,}}>
-                        <ListItemIcon sx={{ minWidth: 0, mx: open ? 3 : 4, justifyContent: "center", }}>
-                            {icon(text.title)} 
-                        </ListItemIcon>
-                        <ListItemText>
-                            <Link to={text.redirect} className="link">
-                                {text.title}
-                            </Link>
-                        </ListItemText>
-                        </ListItemButton>
-                    </ListItem>
-                    ))}
-                </List>
+            <Box sx={{ display: "flex" }}>
+                <CssBaseline />
+                <AppBar position="fixed" open={open} >
+                <Toolbar className="woodColor">
+                    <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    sx={{marginRight: 5,...(open && { display: "none" }),}}
+                    >
+                    <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" noWrap component="div">
+                        Biblioteca Online
+                    </Typography>
+                </Toolbar>
+                </AppBar>
+                <Drawer variant="permanent" open={open}>
+                <DrawerHeader className="woodColor">
+                    <IconButton onClick={handleDrawerClose}>
+                    {theme.direction === "rtl" ? (
+                        <ChevronRightIcon />
+                    ) : (
+                        <ChevronLeftIcon />
+                    )}
+                    </IconButton>
+                </DrawerHeader>
+                <Divider />
+                    <List className="woodColorMenu">
+                        {menu.map((text, index) => (
+                        <ListItem key={index} disablePadding sx={{ display: "block" }} onClick={() => redirecTo(text.redirect)}>
+                            <ListItemButton
+                            sx={{minHeight: 48,justifyContent: open ? "initial" : "center",px: 2.5,}}>
+                            <ListItemIcon sx={{ minWidth: 0, mx: open ? 3 : 4, justifyContent: "center", }}>
+                                {icon(text.title)} 
+                            </ListItemIcon>
+                            <ListItemText>
+                                <Link to={text.redirect} className="link">
+                                    {text.title}
+                                </Link>
+                            </ListItemText>
+                            </ListItemButton>
+                        </ListItem>
+                        ))}
+                    </List>
 
-            </Drawer>
-            <Box component="main" className="centerBox">
-                <DrawerHeader />
-                <Outlet />
+                </Drawer>
+                <Box component="main" className="centerBox">
+                    <DrawerHeader />
+                    <Outlet />
+                </Box>
             </Box>
-        </Box>
-
         </div>
     );
 };

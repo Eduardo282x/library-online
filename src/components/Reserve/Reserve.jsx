@@ -10,9 +10,6 @@ export const Reserve = () => {
         createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', true),
         createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', false),
         createData('El código da Vinci', 'Dan Brown', '2008', true),
-        createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', true),
-        createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', false),
-        createData('El código da Vinci', 'Dan Brown', '2008', true),
     ];
         
     const colmuns = [
@@ -40,7 +37,7 @@ export const Reserve = () => {
         
     return (
         <div>
-                <Card title={'Reservar'} columns={colmuns} rows={rows} showTable={true}/>
+            <Card title={'Reservar'} columns={colmuns} rows={rows} showTable={true}/>
         </div>
     )
 }

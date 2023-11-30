@@ -1,17 +1,15 @@
 import { Card } from "../Shared/Card/Card"
 
 export const Books = () => {
-    function createData(title, author, year, avalible) {
-        return { title, author, year, avalible };
+    function createData(title, author, year, amount) {
+        return { title, author, year, amount };
     }
         
     const rows = [
-        createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', true),
-        createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', false),
-        createData('El código da Vinci', 'Dan Brown', '2008', true),
-        createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', true),
-        createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', false),
-        createData('El código da Vinci', 'Dan Brown', '2008', true),
+        createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', 5),
+        createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', 1),
+        createData('El código da Vinci', 'Dan Brown', '2008', 4),
+
     ];
         
     const colmuns = [
@@ -31,9 +29,9 @@ export const Books = () => {
             type: 'string'
         },
         {
-            header:'Disponible',
-            column: 'avalible',
-            type: 'bool'
+            header:'Cantidad',
+            column: 'amount',
+            type: 'string'
         }
     ];
 

@@ -12,6 +12,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import { useNavigate } from "react-router-dom";
+import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
 
 export const Card = ({ title, columns, rows, showTable }) => {
     const navigate = useNavigate();
@@ -24,10 +29,30 @@ export const Card = ({ title, columns, rows, showTable }) => {
         <div className="cardBody">
             <Paper elevation={8} className="paperContent" square={false}>
                 <div className="headerContent">
-                    <IconButton onClick={back}>
-                        <ArrowBackIcon/>
-                    </IconButton>
-                    <h3>{title}</h3>
+                    <div className="titleBack">
+                        <IconButton onClick={back}>
+                            <ArrowBackIcon/>
+                        </IconButton>
+                        <h3>{title}</h3>
+                    </div>
+
+                    {showTable ?
+                    <div className="search">
+                        <FormControl sx={{ width: '30vw' }} variant="outlined">
+                            <InputLabel htmlFor="outlined-adornment-password">Buscar</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type='text'
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <SearchIcon/>
+                                </InputAdornment>
+                                }
+                                label="Password"
+                            />
+                        </FormControl>
+                    </div>
+                    : ''}
                 </div>
                 
                 {showTable ? 
@@ -49,9 +74,9 @@ export const Card = ({ title, columns, rows, showTable }) => {
                                     {col.type == "string" ? row[col.column] : ""}
                                     {col.type == "bool" ? (
                                     row[col.column] == true ? (
-                                        <DoneIcon />
+                                        <DoneIcon color="success"/>
                                     ) : (
-                                        <CloseIcon />
+                                        <CloseIcon color="error"/>
                                     )
                                     ) : (
                                     ""
