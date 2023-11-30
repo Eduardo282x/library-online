@@ -1,0 +1,28 @@
+.link{
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.centerBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85vw;
+    height: 90vh;
+    overflow: hidden;
+    background-image: url('../../assets/Img/library-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center
+}
+
+.woodColor{
+    background-color: #c8874e;
+    color: #000;
+}
+
+.woodColorMenu{
+    background-color: #c8874e;
+    color: #fff;
+}
