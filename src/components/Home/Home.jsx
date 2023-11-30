@@ -3,7 +3,7 @@ import { Card } from "../Shared/Card/Card"
 export const Home = () => {
     return (
         <div>
-            <Card title={'Bienvenido'}/>
+            <Card title={'Bienvenido'} showTable={false}/>
         </div>
     )
 }
