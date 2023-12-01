@@ -3,7 +3,7 @@ import { Login } from './components/Login/Login';
 import { Home } from './components/Home/Home';
 import { Layout } from './components/Layout/Layout';
 import { ProtectedRouter } from './components/ProtectedRouter/ProtectedRouter';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider  } from 'react-router-dom'
 import { Users } from './components/Users/Users';
 import { Books } from './components/Books/Books';
 import { Reserve } from './components/Reserve/Reserve';
@@ -38,6 +38,10 @@ function App() {
         {
           path: "/users",
           element: <Users/>
+        },
+        {
+          path: "*",
+          element: <Home/>
         },
       ]
     }
