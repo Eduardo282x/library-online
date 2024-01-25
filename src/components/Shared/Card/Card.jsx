@@ -1,13 +1,23 @@
-import PropTypes from "prop-types";
-import "./card.css";
-import { useNavigate } from "react-router-dom";
 import {Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,DoneIcon,CloseIcon,ArrowBackIcon,IconButton,SearchIcon,InputAdornment,FormControl,OutlinedInput,InputLabel,} from '../../materialUI';
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import { useState } from "react";
+import "./card.css";
 
 export const Card = ({ title, columns, rows, showTable }) => {
     const navigate = useNavigate();
-
-    const back = () => {
-        navigate(-1)
+    const [dataFilter, setDateFilter] = useState(rows);
+    const back = () => navigate(-1);
+    
+    const filterValue = (filterInput) => {
+        const filterColumn = columns.filter(col => col.filterOption == true);
+        const filtersKey = filterColumn.map(col => col.column);
+        const filterSearch = filtersKey.map(col => 
+            rows.filter(fil => fil[col].toLowerCase().includes(filterInput.toLowerCase()))
+        ).flat();
+        const reduceFilter = new Set(filterSearch);
+        const result = [...reduceFilter];
+        setDateFilter(result);
     }
 
     return (
@@ -24,16 +34,16 @@ export const Card = ({ title, columns, rows, showTable }) => {
                     {showTable ?
                     <div className="search">
                         <FormControl sx={{ width: '30vw' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Buscar</InputLabel>
+                            <InputLabel>Buscar</InputLabel>
                             <OutlinedInput
-                                id="outlined-adornment-password"
                                 type='text'
+                                onChange={() => filterValue(event.target.value)}
                                 endAdornment={
                                 <InputAdornment position="end">
                                     <SearchIcon/>
                                 </InputAdornment>
                                 }
-                                label="Password"
+                                label="Buscar"
                             />
                         </FormControl>
                     </div>
@@ -52,7 +62,7 @@ export const Card = ({ title, columns, rows, showTable }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) => (
+                            {dataFilter.map((row, index) => (
                             <TableRow key={index}>
                                 {columns.map((col, key) => (
                                 <TableCell key={key}>
