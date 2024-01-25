@@ -34,5 +34,17 @@ export const colmuns = [
         column: 'amount',
         type: 'string',
         filterOption: false
-    }
+    },
+    {
+        header:'Editar',
+        column: 'Edit',
+        type: 'icon',
+        filterOption: false
+    },
+    {
+        header:'Eliminar',
+        column: 'Delete',
+        type: 'icon',
+        filterOption: false
+    },
 ];

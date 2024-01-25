@@ -42,7 +42,10 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import ArticleIcon from '@mui/icons-material/Article';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
+import AddIcon from '@mui/icons-material/Add';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 export {
@@ -64,6 +67,10 @@ FormControl,
 OutlinedInput,
 InputLabel,
 
+DeleteIcon,
+EditIcon,
+
+AddIcon,
 Button,
 Icon,
 VisibilityOffIcon,

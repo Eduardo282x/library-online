@@ -1,29 +1,28 @@
-function createData(title, author, year) {
-    return { title, author, year };
+function createData(name, lastname, identify) {
+    return { name, lastname, identify};
 }
     
 export const rows = [
-    createData('Sistemas de inscripción', 'Jose Perez', '2018',),
-    createData('Registro medico', 'Andres Gonzales', '2019',),
-    createData('Sistema de inventario', 'Angel Lopez', '2015', ),
+    createData('admin', 'admin', '12345678'),
+    createData('Andrea', 'Carolina', '87654321'),
 ];
     
 export const colmuns = [
     {
-        header:'Titulo',
-        column: 'title',
+        header:'Nombre',
+        column: 'name',
         type: 'string',
         filterOption: true,
     },
     {
-        header:'Autor',
-        column: 'author',
+        header:'Apellido',
+        column: 'lastname',
         type: 'string',
         filterOption: true,
     },
     {
-        header:'Año',
-        column: 'year',
+        header:'Cedula',
+        column: 'identify',
         type: 'string',
         filterOption: true,
     },
