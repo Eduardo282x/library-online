@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 
-const drawerWidth = 200;
+const drawerWidth = 250;
 
 export const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -89,5 +89,9 @@ export const menu = [
     {
         title:'Usuarios',
         redirect: '/users'
+    },
+    {
+        title:'Cerrar sesión',
+        redirect: '/'
     },
 ];
