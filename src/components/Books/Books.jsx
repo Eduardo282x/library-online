@@ -1,43 +1,38 @@
 import { Card } from "../Shared/Card/Card"
+import {rows,colmuns} from './books.data';
+import { useState } from "react";
+import { style,Modal,Box } from "../materialUI";
 
 export const Books = () => {
-    function createData(title, author, year, amount) {
-        return { title, author, year, amount };
-    }
-        
-    const rows = [
-        createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', 5),
-        createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', 1),
-        createData('El código da Vinci', 'Dan Brown', '2008', 4),
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-    ];
-        
-    const colmuns = [
-        {
-            header:'Titulo',
-            column: 'title',
-            type: 'string'
-        },
-        {
-            header:'Autor',
-            column: 'author',
-            type: 'string'
-        },
-        {
-            header:'Año',
-            column: 'year',
-            type: 'string'
-        },
-        {
-            header:'Cantidad',
-            column: 'amount',
-            type: 'string'
+    const getDataCard = (data) => {
+        console.log(data);
+        if (data.action == "Add") {
+            handleOpen();
         }
-    ];
+        if (data.action == "Edit") {
+            handleOpen();
+        }
+    };
 
     return (
         <div>
-            <Card title={'Libros'} columns={colmuns} rows={rows} showTable={true}/>
+            <Card title={'Libros'} columns={colmuns} rows={rows} showTable={true} returnData={getDataCard}/>
+
+            
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <p>Hola</p>
+                </Box>
+            </Modal>
         </div>
     )
 }

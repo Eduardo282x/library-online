@@ -1,37 +1,38 @@
 import { Card } from "../Shared/Card/Card";
+import {rows,colmuns} from './thesis.data';
+import { useState } from "react";
+import { style,Modal,Box } from "../materialUI";
 
 export const Thesis = () => {
-    function createData(title, author, year) {
-        return { title, author, year };
-    }
-        
-    const rows = [
-        createData('Sistemas de inscripción', 'Jose Perez', '2018',),
-        createData('Registro medico', 'Andres Gonzales', '2019',),
-        createData('Sistema de inventario', 'Angel Lopez', '2015', ),
-    ];
-        
-    const colmuns = [
-        {
-            header:'Titulo',
-            column: 'title',
-            type: 'string'
-        },
-        {
-            header:'Autor',
-            column: 'author',
-            type: 'string'
-        },
-        {
-            header:'Año',
-            column: 'year',
-            type: 'string'
-        },
-    ];
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const getDataCard = (data) => {
+        console.log(data);
+        if (data.action == "Add") {
+            handleOpen();
+        }
+        if (data.action == "Edit") {
+            handleOpen();
+        }
+    };
 
     return (
         <div>
-            <Card title={'Tesis'} columns={colmuns} rows={rows} showTable={true}/>
+            <Card title={'Tesis'} columns={colmuns} rows={rows} showTable={true} returnData={getDataCard}/>
+
+            
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <p>Hola</p>
+                </Box>
+            </Modal>
         </div>
     )
 }

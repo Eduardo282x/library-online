@@ -1,4 +1,25 @@
-import {Box,Toolbar,List,CssBaseline,IconButton,Typography,Divider,MenuIcon,ChevronLeftIcon,ChevronRightIcon,ListItem,ListItemButton,ListItemIcon,ListItemText,BookIcon,BookmarkIcon,MenuBookIcon,PeopleAltIcon,ArticleIcon,} from '../materialUI';
+import {
+    Box,
+    Toolbar,
+    List,
+    CssBaseline,
+    IconButton,
+    Typography,
+    Divider,
+    MenuIcon,
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    BookIcon,
+    BookmarkIcon,
+    MenuBookIcon,
+    PeopleAltIcon,
+    ArticleIcon,
+    LogoutIcon
+} from '../materialUI';
 import { useState } from "react";
 import { Outlet, Link, useNavigate  } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
@@ -11,25 +32,18 @@ export const Layout = () => {
     const navigate = useNavigate();
 
     const redirecTo = (path) => {
+        if (path == '/') localStorage.removeItem('payload');
         navigate(path)
     }
     
     const icon = (menu) => {
-        if(menu == 'Inicio'){
-            return <MenuBookIcon/>
-        }
-        if(menu == 'Libros'){
-            return <BookIcon/>
-        }
-        if(menu == 'Reservar'){
-            return <BookmarkIcon/>
-        }
-        if(menu == 'Usuarios'){
-            return <PeopleAltIcon/>
-        }
-        if(menu == 'Tesis'){
-            return <ArticleIcon/>
-        }
+        if(menu == 'Inicio') return <MenuBookIcon/>;
+        if(menu == 'Libros') return <BookIcon/>;
+        if(menu == 'Reservar') return <BookmarkIcon/>;
+        if(menu == 'Usuarios') return <PeopleAltIcon/>;
+        if(menu == 'Tesis') return <ArticleIcon/>;
+        if(menu == 'Tesis') return <ArticleIcon/>;
+        if(menu == 'Cerrar sesión') return <LogoutIcon/>;
     }
 
     const handleDrawerOpen = () => {
@@ -45,7 +59,7 @@ export const Layout = () => {
             <Box sx={{ display: "flex" }}>
                 <CssBaseline />
                 <AppBar position="fixed" open={open} >
-                <Toolbar className="woodColor">
+                <Toolbar className="bg-[#c8874e] text-black">
                     <IconButton
                     color="inherit"
                     aria-label="open drawer"
@@ -61,7 +75,7 @@ export const Layout = () => {
                 </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
-                <DrawerHeader className="woodColor">
+                <DrawerHeader className="bg-[#c8874e]">
                     <IconButton onClick={handleDrawerClose}>
                     {theme.direction === "rtl" ? (
                         <ChevronRightIcon />
@@ -71,7 +85,7 @@ export const Layout = () => {
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
-                    <List className="woodColorMenu">
+                    <List className="bg-[#c8874e] text-white">
                         {menu.map((text, index) => (
                         <ListItem key={index} disablePadding sx={{ display: "block" }} onClick={() => redirecTo(text.redirect)}>
                             <ListItemButton
@@ -80,7 +94,7 @@ export const Layout = () => {
                                 {icon(text.title)} 
                             </ListItemIcon>
                             <ListItemText>
-                                <Link to={text.redirect} className="link">
+                                <Link to={text.redirect} className='font-bold'>
                                     {text.title}
                                 </Link>
                             </ListItemText>
@@ -90,7 +104,7 @@ export const Layout = () => {
                     </List>
 
                 </Drawer>
-                <Box component="main" className="centerBox">
+                <Box component="main" className="centerBox" onClick={handleDrawerClose}>
                     <DrawerHeader />
                     <Outlet />
                 </Box>

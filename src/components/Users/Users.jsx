@@ -1,36 +1,38 @@
-import { Card } from "../Shared/Card/Card"
+import { Card } from "../Shared/Card/Card";
+import { useState } from "react";
+import {rows,colmuns} from './user.data';
+import { style,Modal,Box } from "../materialUI";
 
 export const Users = () => {
-    function createData(name, lastname, identify) {
-        return { name, lastname, identify};
-    }
-        
-    const rows = [
-        createData('admin', 'admin', '12345678'),
-        createData('Andrea', 'Carolina', '87654321'),
-    ];
-        
-    const colmuns = [
-        {
-            header:'Nombre',
-            column: 'name',
-            type: 'string'
-        },
-        {
-            header:'Apellido',
-            column: 'lastname',
-            type: 'string'
-        },
-        {
-            header:'Cedula',
-            column: 'identify',
-            type: 'string'
-        },
-    ];
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const getDataCard = (data) => {
+        console.log(data);
+        if (data.action == "Add") {
+            handleOpen();
+        }
+        if (data.action == "Edit") {
+            handleOpen();
+        }
+    };
 
     return (
         <div>
-            <Card title={'Usuarios'} columns={colmuns} rows={rows} showTable={true}/>
+            <Card title={'Usuarios'} columns={colmuns} rows={rows} showTable={true} returnData={getDataCard}/>
+
+            
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <p>Hola</p>
+                </Box>
+            </Modal>
         </div>
     )
 }

@@ -1,13 +1,78 @@
-import PropTypes from "prop-types";
-import "./card.css";
+import {
+    DeleteIcon,
+    EditIcon,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    DoneIcon,
+    CloseIcon,
+    ArrowBackIcon,
+    IconButton,
+    SearchIcon,
+    InputAdornment,
+    FormControl,
+    OutlinedInput,
+    InputLabel,
+    TablePagination,
+    AddIcon,
+} from '../../materialUI';
 import { useNavigate } from "react-router-dom";
-import {Paper,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,DoneIcon,CloseIcon,ArrowBackIcon,IconButton,SearchIcon,InputAdornment,FormControl,OutlinedInput,InputLabel,} from '../../materialUI';
+import PropTypes from "prop-types";
+import { useState } from "react";
+import { pink } from '@mui/material/colors';
 
-export const Card = ({ title, columns, rows, showTable }) => {
+import "./card.css";
+
+export const Card = ({ title, columns, rows, showTable, returnData }) => {
+    const [dataFilter, setDateFilter] = useState(rows);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
     const navigate = useNavigate();
+    const back = () => navigate(-1);
+    const filterValue = (filterInput) => {
+        const filterColumn = columns.filter(col => col.filterOption == true);
+        const filtersKey = filterColumn.map(col => col.column);
+        const filterSearch = filtersKey.map(col => 
+            rows.filter(fil => fil[col].toLowerCase().includes(filterInput.toLowerCase()))
+        ).flat();
+        const reduceFilter = new Set(filterSearch);
+        const result = [...reduceFilter];
+        setDateFilter(result);
+    };
 
-    const back = () => {
-        navigate(-1)
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
+    const addNew = () => {
+        returnData({data: null, action: 'Add'});
+    }
+
+    const getRowDate = (dataRow, action) => {
+        returnData({data: dataRow, action: action});
+    }
+
+    const icon = (iconColumn, rowData) => {
+        if(iconColumn == 'Delete') return (
+        <IconButton onClick={() => getRowDate(rowData, iconColumn)}>
+            <DeleteIcon  className='cursor-pointer' sx={{ color: pink[500] }} />
+        </IconButton>
+        ) ;
+        if(iconColumn == 'Edit') return (
+            <IconButton onClick={() => getRowDate(rowData, iconColumn)}>
+                <EditIcon  className='cursor-pointer' color='primary'/>
+            </IconButton>
+        );
     }
 
     return (
@@ -22,20 +87,24 @@ export const Card = ({ title, columns, rows, showTable }) => {
                     </div>
 
                     {showTable ?
-                    <div className="search">
+                    <div className="flex items-center justify-center">
                         <FormControl sx={{ width: '30vw' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Buscar</InputLabel>
+                            <InputLabel>Buscar</InputLabel>
                             <OutlinedInput
-                                id="outlined-adornment-password"
                                 type='text'
+                                onChange={() => filterValue(event.target.value)}
                                 endAdornment={
                                 <InputAdornment position="end">
                                     <SearchIcon/>
                                 </InputAdornment>
                                 }
-                                label="Password"
+                                label="Buscar"
                             />
                         </FormControl>
+
+                        <IconButton onClick={addNew}>
+                            <AddIcon color='primary'/>
+                        </IconButton>
                     </div>
                     : ''}
                 </div>
@@ -43,7 +112,7 @@ export const Card = ({ title, columns, rows, showTable }) => {
                 {showTable ? 
                 <div className="tableContent">
                     <TableContainer component={Paper}>
-                        <Table aria-label="simple table">
+                        <Table aria-label="sticky table">
                         <TableHead>
                             <TableRow className="headerRow">
                             {columns.map((col, index) => (
@@ -52,20 +121,15 @@ export const Card = ({ title, columns, rows, showTable }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) => (
+                            {dataFilter
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row, index) => (
                             <TableRow key={index}>
                                 {columns.map((col, key) => (
-                                <TableCell key={key}>
+                                <TableCell key={key} sx={{width: col.width ? col.width : 100}}>
                                     {col.type == "string" ? row[col.column] : ""}
-                                    {col.type == "bool" ? (
-                                    row[col.column] == true ? (
-                                        <DoneIcon color="success"/>
-                                    ) : (
-                                        <CloseIcon color="error"/>
-                                    )
-                                    ) : (
-                                    ""
-                                    )}
+                                    {col.type == "bool" ? (row[col.column] == true ? (<DoneIcon color="success"/>) : (<CloseIcon color="error"/>)) : ("")}
+                                    {col.type == "icon" ? icon(col.column, row) : ""}
                                 </TableCell>
                                 ))}
                             </TableRow>
@@ -73,8 +137,24 @@ export const Card = ({ title, columns, rows, showTable }) => {
                         </TableBody>
                         </Table>
                     </TableContainer>
+
                 </div>
                 : ''}
+
+                {showTable ? 
+                    <TablePagination
+                    className='absolute right-5 bottom-5'
+                    labelRowsPerPage='Registros'
+                    rowsPerPageOptions={[5,10,25,50]}
+                    component="div"
+                    count={dataFilter.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+                    : ''
+                }
             </Paper>
         </div>
     );
@@ -84,5 +164,6 @@ Card.propTypes = {
     title: PropTypes.string,
     columns: PropTypes.array,
     rows: PropTypes.array,
-    showTable: PropTypes.bool
+    showTable: PropTypes.bool,
+    returnData: PropTypes.func
 };
