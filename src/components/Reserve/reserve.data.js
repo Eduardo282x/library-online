@@ -6,6 +6,17 @@ export const rows = [
     createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', true),
     createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', false),
     createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
+    createData('El código da Vinci', 'Dan Brown', '2008', true),
 ];
     
 export const colmuns = [
@@ -14,12 +25,14 @@ export const colmuns = [
         column: 'title',
         type: 'string',
         filterOption: true,
+        width:350
     },
     {
         header:'Autor',
         column: 'author',
         type: 'string',
         filterOption: true,
+        width:200
     },
     {
         header:'Año',
@@ -32,5 +45,11 @@ export const colmuns = [
         column: 'avalible',
         type: 'bool',
         filterOption: false
-    }
+    },
+    {
+        header:'Eliminar',
+        column: 'Delete',
+        type: 'icon',
+        filterOption: false,
+    },
 ];

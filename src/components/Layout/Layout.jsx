@@ -46,7 +46,6 @@ export const Layout = () => {
         if(menu == 'Cerrar sesión') return <LogoutIcon/>;
     }
 
-
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -105,7 +104,7 @@ export const Layout = () => {
                     </List>
 
                 </Drawer>
-                <Box component="main" className="centerBox">
+                <Box component="main" className="centerBox" onClick={handleDrawerClose}>
                     <DrawerHeader />
                     <Outlet />
                 </Box>

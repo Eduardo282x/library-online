@@ -13,12 +13,14 @@ export const colmuns = [
         column: 'name',
         type: 'string',
         filterOption: true,
+        width:350
     },
     {
         header:'Apellido',
         column: 'lastname',
         type: 'string',
         filterOption: true,
+        width:200
     },
     {
         header:'Cedula',

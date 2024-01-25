@@ -17,6 +17,7 @@ import {
     FormControl,
     OutlinedInput,
     InputLabel,
+    TablePagination,
     AddIcon,
 } from '../../materialUI';
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,9 @@ import "./card.css";
 
 export const Card = ({ title, columns, rows, showTable, returnData }) => {
     const [dataFilter, setDateFilter] = useState(rows);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
     const navigate = useNavigate();
     const back = () => navigate(-1);
     const filterValue = (filterInput) => {
@@ -41,8 +45,17 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
         setDateFilter(result);
     };
 
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
+
     const addNew = () => {
-        returnData({data: null, action: 'add'});
+        returnData({data: null, action: 'Add'});
     }
 
     const getRowDate = (dataRow, action) => {
@@ -99,7 +112,7 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
                 {showTable ? 
                 <div className="tableContent">
                     <TableContainer component={Paper}>
-                        <Table aria-label="simple table">
+                        <Table aria-label="sticky table">
                         <TableHead>
                             <TableRow className="headerRow">
                             {columns.map((col, index) => (
@@ -108,10 +121,12 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {dataFilter.map((row, index) => (
+                            {dataFilter
+                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                            .map((row, index) => (
                             <TableRow key={index}>
                                 {columns.map((col, key) => (
-                                <TableCell key={key}>
+                                <TableCell key={key} sx={{width: col.width ? col.width : 100}}>
                                     {col.type == "string" ? row[col.column] : ""}
                                     {col.type == "bool" ? (row[col.column] == true ? (<DoneIcon color="success"/>) : (<CloseIcon color="error"/>)) : ("")}
                                     {col.type == "icon" ? icon(col.column, row) : ""}
@@ -122,8 +137,24 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
                         </TableBody>
                         </Table>
                     </TableContainer>
+
                 </div>
                 : ''}
+
+                {showTable ? 
+                    <TablePagination
+                    className='absolute right-5 bottom-5'
+                    labelRowsPerPage='Registros'
+                    rowsPerPageOptions={[5,10,25,50]}
+                    component="div"
+                    count={dataFilter.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+                    : ''
+                }
             </Paper>
         </div>
     );

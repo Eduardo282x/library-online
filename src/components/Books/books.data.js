@@ -15,13 +15,15 @@ export const colmuns = [
         header:'Titulo',
         column: 'title',
         type: 'string',
-        filterOption: true
+        filterOption: true,
+        width:350
     },
     {
         header:'Autor',
         column: 'author',
         type: 'string',
-        filterOption: true
+        filterOption: true,
+        width:200
     },
     {
         header:'Año',

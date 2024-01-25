@@ -14,12 +14,14 @@ export const colmuns = [
         column: 'title',
         type: 'string',
         filterOption: true,
+        width:350
     },
     {
         header:'Autor',
         column: 'author',
         type: 'string',
         filterOption: true,
+        width:200
     },
     {
         header:'Año',

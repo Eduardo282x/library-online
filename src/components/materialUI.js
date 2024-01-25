@@ -14,16 +14,12 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
-
-import TextField  from '@mui/material/TextField';
-
-
+import TablePagination from '@mui/material/TablePagination';
+import TextField from '@mui/material/TextField';
 import Icon from '@mui/material/Icon';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-
 import Button from '@mui/material/Button';
-
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
@@ -44,55 +40,70 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import ArticleIcon from '@mui/icons-material/Article';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-
 import AddIcon from '@mui/icons-material/Add';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import Modal from '@mui/material/Modal';
+
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    borderRadius: '1rem',
+    p: 4,
+};
+
 export {
-Paper,
-Table,
-TableBody,
-TableCell,
-TableContainer,
-TableHead,
-TableRow,
-DoneIcon,
-TextField,
-CloseIcon,
-ArrowBackIcon,
-IconButton,
-SearchIcon,
-InputAdornment,
-FormControl,
-OutlinedInput,
-InputLabel,
-
-DeleteIcon,
-EditIcon,
-
-AddIcon,
-Button,
-Icon,
-VisibilityOffIcon,
-VisibilityIcon,
-LogoutIcon,
-AccountCircleIcon,
-Box,
-Toolbar,
-List,
-CssBaseline,
-Typography,
-Divider,
-MenuIcon,
-ChevronLeftIcon,
-ChevronRightIcon,
-ListItem,
-ListItemButton,
-ListItemIcon,
-ListItemText,
-BookIcon,
-BookmarkIcon,
-MenuBookIcon,
-PeopleAltIcon,
-ArticleIcon,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    DoneIcon,
+    TextField,
+    CloseIcon,
+    ArrowBackIcon,
+    IconButton,
+    Modal,
+    SearchIcon,
+    InputAdornment,
+    FormControl,
+    OutlinedInput,
+    InputLabel,
+    DeleteIcon,
+    TablePagination,
+    EditIcon,
+    AddIcon,
+    Button,
+    Icon,
+    VisibilityOffIcon,
+    VisibilityIcon,
+    LogoutIcon,
+    AccountCircleIcon,
+    Box,
+    Toolbar,
+    List,
+    CssBaseline,
+    Typography,
+    Divider,
+    MenuIcon,
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    BookIcon,
+    BookmarkIcon,
+    MenuBookIcon,
+    PeopleAltIcon,
+    ArticleIcon,
+    style,
 }
