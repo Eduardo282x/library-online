@@ -1,13 +1,26 @@
 import { Card } from "../Shared/Card/Card";
-import { rows, colmuns } from "./reserve.data";
-import { useState } from "react";
+import { colmuns } from "./reserve.data";
+import { useState, useEffect } from "react";
 import { style, Box, Modal } from "../materialUI";
+import {getDataApi} from '../../backend/BasicAxios'
 
 export const Reserve = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [rows,setRows] = useState([]);
+    
+    const getThesisApi = () => {
+        getDataApi('library')
+        .then((data) => {
+            setRows(data);
+        })
+        .catch(err => {console.log(err)})
+    }
 
+    useEffect(()=> {
+        getThesisApi();
+    }, []);
     const getDataCard = (data) => {
         console.log(data);
         if (data.action == "Add") {
@@ -20,6 +33,7 @@ export const Reserve = () => {
 
     return (
         <div>
+            {rows && rows.length > 0 ?
             <Card
                 title={"Reservar"}
                 columns={colmuns}
@@ -27,6 +41,8 @@ export const Reserve = () => {
                 showTable={true}
                 returnData={getDataCard}
             />
+            : ''
+        }
 
             <Modal
                 open={open}

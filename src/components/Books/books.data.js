@@ -1,39 +1,29 @@
-function createData(title, author, year, amount) {
-    return { title, author, year, amount };
-}
-    
-export const rows = [
-    createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', 5),
-    createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', 1),
-    createData('El código da Vinci', 'Dan Brown', '2008', 4),
-    createData('Otero libri', 'J.R.R. Tolkien', '2008', 4),
-    createData('nuevo libro', 'Robert Louis Stevenson', '2008', 4),
-];
-    
+import * as yup from 'yup';
+
 export const colmuns = [
     {
         header:'Titulo',
-        column: 'title',
+        column: 'Title',
         type: 'string',
         filterOption: true,
         width:350
     },
     {
         header:'Autor',
-        column: 'author',
+        column: 'Author',
         type: 'string',
         filterOption: true,
         width:200
     },
     {
         header:'Año',
-        column: 'year',
+        column: 'Age',
         type: 'string',
         filterOption: true
     },
     {
         header:'Cantidad',
-        column: 'amount',
+        column: 'Amount',
         type: 'string',
         filterOption: false
     },
@@ -50,3 +40,57 @@ export const colmuns = [
         filterOption: false
     },
 ];
+
+export const bodyBook= {    
+    Title: '',
+    Author: '',
+    Age: '',
+    Amount: '',
+    IsBook: 1,
+}
+
+export const validationSchema = yup.object({
+    Title : yup.string().required('El titutlo es requerido'),
+    Author : yup.string().required('El autor es requerido'),
+    Age : yup.string().required('El año es requerido'),
+    Amount : yup.number().required('La cantidad es requerida'),
+    IsBook : yup.string().required()
+});
+
+export const formBook =[
+    {
+        label: 'Titulo',
+        input: true,
+        type: 'text',
+        name: 'Title',
+        value: '',
+    },
+    {
+        label: 'Autor',
+        input: true,
+        type: 'text',
+        name: 'Author',
+        value: '',
+    },
+    {
+        label: 'Año',
+        input: true,
+        type: 'text',
+        name: 'Age',
+        value: '',
+    },
+    {
+        label: 'Cantidad',
+        input: true,
+        type: 'text',
+        name: 'Amount',
+        value: '',
+    },
+    // {
+    //     label: 'Libro o Tesis',
+    //     select: true,
+    //     type: 'text',
+    //     name: 'IsBook',
+    //     value: '',
+    // },
+]

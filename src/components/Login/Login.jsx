@@ -27,7 +27,6 @@ export const Login = () => {
     })
 
     const logIn = (values) => {
-        console.log(values);
         postDataApi('/authentication', values).then((data) => {
             if(data.success){
                 localStorage.setItem('payload', JSON.stringify(data.userData));

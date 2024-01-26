@@ -22,27 +22,45 @@ import {
 } from '../../materialUI';
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import {  useEffect, useState } from "react";
 import { pink } from '@mui/material/colors';
 
 import "./card.css";
 
 export const Card = ({ title, columns, rows, showTable, returnData }) => {
-    const [dataFilter, setDateFilter] = useState(rows);
+    const [dataFilter, setDateFilter] = useState([]);
+    const [columnsCard, setColumnsCard] = useState(columns);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
-
     const navigate = useNavigate();
     const back = () => navigate(-1);
+    const userData = JSON.parse(localStorage.getItem('payload'));
+
+    useEffect(() => {
+        console.log(userData);
+        if(userData && columns && columns.length >0){
+            if (userData.Rol != 1) {
+                columns = columns.filter(col => col.column != 'Edit' && col.column != 'Delete');
+                setColumnsCard(columns)
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        setDateFilter(rows);
+    }, [rows]);
+
     const filterValue = (filterInput) => {
-        const filterColumn = columns.filter(col => col.filterOption == true);
-        const filtersKey = filterColumn.map(col => col.column);
-        const filterSearch = filtersKey.map(col => 
-            rows.filter(fil => fil[col].toLowerCase().includes(filterInput.toLowerCase()))
-        ).flat();
-        const reduceFilter = new Set(filterSearch);
-        const result = [...reduceFilter];
-        setDateFilter(result);
+        if(rows && rows.length > 0){
+            const filterColumn = columns.filter(col => col.filterOption == true);
+            const filtersKey = filterColumn.map(col => col.column);
+            const filterSearch = filtersKey.map(col => 
+                rows.filter(fil => fil[col].toLowerCase().includes(filterInput.toLowerCase()))
+            ).flat();
+            const reduceFilter = new Set(filterSearch);
+            const result = [...reduceFilter];
+            setDateFilter(result);
+        }
     };
 
     const handleChangePage = (event, newPage) => {
@@ -102,9 +120,13 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
                             />
                         </FormControl>
 
-                        <IconButton onClick={addNew}>
-                            <AddIcon color='primary'/>
-                        </IconButton>
+                        {userData.Rol == 1 ?
+                            <IconButton onClick={addNew}>
+                                <AddIcon color='primary'/>
+                            </IconButton> 
+                            : ''
+                        }
+                        
                     </div>
                     : ''}
                 </div>
@@ -115,7 +137,7 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
                         <Table aria-label="sticky table">
                         <TableHead>
                             <TableRow className="headerRow">
-                            {columns.map((col, index) => (
+                            {columnsCard.map((col, index) => (
                                 <TableCell key={index} className="headerCol">{col.header}</TableCell>
                             ))}
                             </TableRow>
@@ -125,7 +147,7 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row, index) => (
                             <TableRow key={index}>
-                                {columns.map((col, key) => (
+                                {columnsCard.map((col, key) => (
                                 <TableCell key={key} sx={{width: col.width ? col.width : 100}}>
                                     {col.type == "string" ? row[col.column] : ""}
                                     {col.type == "bool" ? (row[col.column] == true ? (<DoneIcon color="success"/>) : (<CloseIcon color="error"/>)) : ("")}
