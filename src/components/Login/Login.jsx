@@ -1,6 +1,4 @@
 import {FormControl,
-    // InputLabel,
-    // OutlinedInput,
     TextField ,
     InputAdornment,
     Icon,
@@ -11,7 +9,7 @@ import {FormControl,
     Button,
 } from '../materialUI';
 import { useFormik } from 'formik';
-
+import {postDataApi} from '../../backend/BasicAxios';
 import {loginForm, validationSchema} from './login.data';
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -30,7 +28,16 @@ export const Login = () => {
 
     const logIn = (values) => {
         console.log(values);
-        navigate('/home');
+        postDataApi('/authentication', values).then((data) => {
+            if(data.success){
+                localStorage.setItem('payload', JSON.stringify(data.userData));
+                setTimeout(() => {
+                    navigate("/home");
+                }, 1500);
+            }
+        }).catch(err =>{
+            console.log(err);
+        });
     };
 
     return (
