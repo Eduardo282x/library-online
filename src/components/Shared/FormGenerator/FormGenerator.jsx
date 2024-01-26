@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Button, TextField} from '../../materialUI';
+import { Button, TextField, FormControl, InputLabel, Select, MenuItem} from '../../materialUI';
 import { useFormik } from "formik";
 
 export const FormGenerator = ({ title, dataForm, bodySend, validationSchema, action, sendFather }) => {
@@ -35,23 +35,24 @@ export const FormGenerator = ({ title, dataForm, bodySend, validationSchema, act
                             helperText={formik.touched[formInput.name] && formik.errors[formInput.name]}
                             variant="outlined"
                         />
-                    ) : ''
-                    // (
-                    //     formInput.select && (
-                    //         <FormControl fullWidth key={index}>
-                    //             <InputLabel>{formInput.label}</InputLabel>
-                    //             <Select
-                    //                 value={formik.values[formInput.name]}
-                    //                 onChange={formik.handleChange}
-                    //                 label={formInput.label}
-                    //                 name={formInput.name}
-                    //             >
-                    //                 <MenuItem value={1}>Libro</MenuItem>
-                    //                 <MenuItem value={0}>Tesis</MenuItem>
-                    //             </Select>
-                    //         </FormControl>
-                    //     )
-                    // )
+                    ) :
+                    (
+                        formInput.select && (
+                            <FormControl fullWidth key={index}>
+                                <InputLabel>{formInput.label}</InputLabel>
+                                <Select
+                                    value={formik.values[formInput.name]}
+                                    onChange={formik.handleChange}
+                                    label={formInput.label}
+                                    name={formInput.name}
+                                >
+                                    {formInput.valueOptions.map((item, index) => (
+                                        <MenuItem key={index} value={item.value}>{item.label}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        )
+                    )
                 ))}
 
                 <Button type="submit" variant="contained" disabled={!formik.isValid} >

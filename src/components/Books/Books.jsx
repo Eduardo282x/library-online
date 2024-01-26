@@ -88,7 +88,7 @@ export const Books = () => {
 
     return (
         <div>
-            {rows && rows.length > 0 ?
+            {rows ?
                 <Card title={'Libros'} columns={colmuns} rows={rows} showTable={true} returnData={getDataCard}/>
             : ''}
             

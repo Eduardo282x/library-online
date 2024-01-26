@@ -85,7 +85,7 @@ export const Users = () => {
 
     return (
         <div>
-            {rows && rows.length > 0 ?
+            {rows ?
                 <Card title={'Usuarios'} columns={colmuns} rows={rows} showTable={true} returnData={getDataCard}/>
                 :''
             }

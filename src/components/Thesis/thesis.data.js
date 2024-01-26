@@ -22,6 +22,12 @@ export const colmuns = [
         filterOption: true,
     },
     {
+        header:'Disponible',
+        column: 'AmountAvalible',
+        type: 'bool',
+        filterOption: false
+    },
+    {
         header:'Editar',
         column: 'Edit',
         type: 'icon',

@@ -37,7 +37,6 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
     const userData = JSON.parse(localStorage.getItem('payload'));
 
     useEffect(() => {
-        console.log(userData);
         if(userData && columns && columns.length >0){
             if (userData.Rol != 1) {
                 columns = columns.filter(col => col.column != 'Edit' && col.column != 'Delete');

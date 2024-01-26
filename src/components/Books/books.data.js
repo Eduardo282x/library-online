@@ -28,6 +28,12 @@ export const colmuns = [
         filterOption: false
     },
     {
+        header:'Disponibles',
+        column: 'AmountAvalible',
+        type: 'string',
+        filterOption: false
+    },
+    {
         header:'Editar',
         column: 'Edit',
         type: 'icon',

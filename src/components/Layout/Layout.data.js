@@ -72,26 +72,32 @@ export const Drawer = styled(MuiDrawer, {
 export const menu = [
     {
         title:'Inicio',
-        redirect: '/home'
+        redirect: '/home',
+        adminPermisses: false
     },
     {
         title:'Libros',
-        redirect: '/books'
+        redirect: '/books',
+        adminPermisses: false
     },
     {
         title:'Reservar',
-        redirect: '/reserve'
+        redirect: '/reserve',
+        adminPermisses: true
     },
     {
         title:'Tesis',
-        redirect: '/thesis'
+        redirect: '/thesis',
+        adminPermisses: false
     },
     {
         title:'Usuarios',
-        redirect: '/users'
+        redirect: '/users',
+        adminPermisses: true
     },
     {
         title:'Cerrar sesión',
-        redirect: '/'
+        redirect: '/',
+        adminPermisses: false
     },
 ];

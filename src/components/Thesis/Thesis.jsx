@@ -89,7 +89,7 @@ export const Thesis = () => {
 
     return (
         <div>
-            {rows && rows.length > 0 ?
+            {rows ?
                 <Card title={'Tesis'} columns={colmuns} rows={rows} showTable={true} returnData={getDataCard}/>
                 : ''
             }
