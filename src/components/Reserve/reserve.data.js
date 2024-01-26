@@ -1,50 +1,25 @@
-function createData(title, author, year, avalible) {
-    return { title, author, year, avalible };
-}
-    
-export const rows = [
-    createData('El señor de los anillos', 'J.R.R. Tolkien', '2012', true),
-    createData('La isla del tesoro', 'Robert Louis Stevenson', '2006', false),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-    createData('El código da Vinci', 'Dan Brown', '2008', true),
-];
-    
+import * as yup from 'yup';
+
 export const colmuns = [
     {
-        header:'Titulo',
-        column: 'title',
+        header:'Libro',
+        column: 'Title',
         type: 'string',
         filterOption: true,
         width:350
     },
     {
-        header:'Autor',
-        column: 'author',
+        header:'Alumno',
+        column: 'Name',
         type: 'string',
         filterOption: true,
         width:200
     },
     {
-        header:'Año',
-        column: 'year',
+        header:'Cantidad',
+        column: 'Amount',
         type: 'string',
-        filterOption: true,
-    },
-    {
-        header:'Disponible',
-        column: 'avalible',
-        type: 'bool',
-        filterOption: false
+        filterOption: false,
     },
     {
         header:'Eliminar',
@@ -53,3 +28,42 @@ export const colmuns = [
         filterOption: false,
     },
 ];
+
+
+export const bodyLibrary= {    
+    IdUser: '',
+    IdBookTest: '',
+    Amount: '',
+}
+
+export const validationSchema = yup.object({
+    IdUser : yup.string().required('El titutlo es requerido'),
+    IdBookTest : yup.string().required('El autor es requerido'),
+    Amount : yup.string().required('El año es requerido'),
+});
+
+export const formLibrary =[
+    {
+        label: 'Usuario',
+        select: true,
+        type: 'text',
+        name: 'IdUser',
+        value: '',
+        valueOptions: []
+    },
+    {
+        label: 'Libro o Tesis',
+        select: true,
+        type: 'text',
+        name: 'IdBookTest',
+        value: '',
+        valueOptions: []
+    },
+    {
+        label: 'Cantidad',
+        input: true,
+        type: 'text',
+        name: 'Amount',
+        value: '',
+    },
+]

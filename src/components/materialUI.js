@@ -45,6 +45,9 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Modal from '@mui/material/Modal';
 
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
 
 const style = {
     position: 'absolute',
@@ -70,6 +73,8 @@ export {
     TextField,
     CloseIcon,
     ArrowBackIcon,
+    MenuItem,
+    Select,
     IconButton,
     Modal,
     SearchIcon,

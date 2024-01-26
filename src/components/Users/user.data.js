@@ -1,32 +1,26 @@
-function createData(name, lastname, identify) {
-    return { name, lastname, identify};
-}
-    
-export const rows = [
-    createData('admin', 'admin', '12345678'),
-    createData('Andrea', 'Carolina', '87654321'),
-];
-    
+import * as yup from 'yup';
+
 export const colmuns = [
     {
         header:'Nombre',
-        column: 'name',
+        column: 'Name',
         type: 'string',
         filterOption: true,
         width:350
     },
     {
         header:'Apellido',
-        column: 'lastname',
+        column: 'Lastname',
         type: 'string',
         filterOption: true,
         width:200
     },
     {
-        header:'Cedula',
-        column: 'identify',
+        header:'Nombre de Usuario',
+        column: 'Username',
         type: 'string',
         filterOption: true,
+        width:200
     },
     {
         header:'Editar',
@@ -41,3 +35,40 @@ export const colmuns = [
         filterOption: false,
     },
 ];
+
+
+export const bodyUser= {    
+    Name: '',
+    Lastname: '',
+    Username: '',
+}
+
+export const validationSchema = yup.object({
+    Name : yup.string().required('El Nombre es requerido'),
+    Lastname : yup.string().required('El Apellido es requerido'),
+    Username : yup.string().required('El Nombre de usuario es requerido'),
+});
+
+export const formUser =[
+    {
+        label: 'Nombre',
+        input: true,
+        type: 'text',
+        name: 'Name',
+        value: '',
+    },
+    {
+        label: 'Apellido',
+        input: true,
+        type: 'text',
+        name: 'Lastname',
+        value: '',
+    },
+    {
+        label: 'Nombre de Usuario',
+        input: true,
+        type: 'text',
+        name: 'Username',
+        value: '',
+    },
+]

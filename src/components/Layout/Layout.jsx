@@ -20,7 +20,7 @@ import {
     ArticleIcon,
     LogoutIcon
 } from '../materialUI';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, Link, useNavigate  } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import './layout.css'
@@ -28,13 +28,28 @@ import { DrawerHeader, AppBar, Drawer, menu} from './Layout.data'
 
 export const Layout = () => {
     const theme = useTheme();
+    const userData = JSON.parse(localStorage.getItem('payload'));
     const [open, setOpen] = useState(false);
+    const [newMenu, setNewMenu] = useState(menu);
     const navigate = useNavigate();
 
     const redirecTo = (path) => {
         if (path == '/') localStorage.removeItem('payload');
         navigate(path)
+    };
+
+    const updateMenu = () => {
+        let menuTemp = [...newMenu];
+
+        if(userData.Rol != 1){
+            menuTemp = menuTemp.filter(opt => opt.adminPermisses == false);
+            setNewMenu(menuTemp);
+        }
     }
+
+    useEffect(()=> {
+        updateMenu();
+    },[])
     
     const icon = (menu) => {
         if(menu == 'Inicio') return <MenuBookIcon/>;
@@ -86,7 +101,7 @@ export const Layout = () => {
                 </DrawerHeader>
                 <Divider />
                     <List className="bg-[#c8874e] text-white">
-                        {menu.map((text, index) => (
+                        {newMenu.map((text, index) => (
                         <ListItem key={index} disablePadding sx={{ display: "block" }} onClick={() => redirecTo(text.redirect)}>
                             <ListItemButton
                             sx={{minHeight: 48,justifyContent: open ? "initial" : "center",px: 2.5,}}>
