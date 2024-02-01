@@ -15,12 +15,12 @@ export const colmuns = [
         filterOption: true,
         width:200
     },
-    {
-        header:'Cantidad',
-        column: 'Amount',
-        type: 'string',
-        filterOption: false,
-    },
+    // {
+    //     header:'Existencia',
+    //     column: 'Amount',
+    //     type: 'string',
+    //     filterOption: false,
+    // },
     {
         header:'Eliminar',
         column: 'Delete',
@@ -33,13 +33,11 @@ export const colmuns = [
 export const bodyLibrary= {    
     IdUser: '',
     IdBookTest: '',
-    Amount: '',
 }
 
 export const validationSchema = yup.object({
     IdUser : yup.string().required('El titutlo es requerido'),
     IdBookTest : yup.string().required('El autor es requerido'),
-    Amount : yup.string().required('El año es requerido'),
 });
 
 export const formLibrary =[
@@ -53,17 +51,18 @@ export const formLibrary =[
     },
     {
         label: 'Libro o Tesis',
-        select: true,
-        type: 'text',
+        autocomplete: true,
+        type: 'autocomplete',
+        options: [{label: 'yo', year: 500}],
         name: 'IdBookTest',
         value: '',
         valueOptions: []
     },
-    {
-        label: 'Cantidad',
-        input: true,
-        type: 'text',
-        name: 'Amount',
-        value: '',
-    },
+    // {
+    //     label: 'Existencia',
+    //     input: true,
+    //     type: 'text',
+    //     name: 'Amount',
+    //     value: '',
+    // },
 ]

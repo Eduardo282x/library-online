@@ -86,7 +86,7 @@ export const Users = () => {
     return (
         <div>
             {rows ?
-                <Card title={'Usuarios'} columns={colmuns} rows={rows} showTable={true} returnData={getDataCard}/>
+                <Card title={'Usuarios'} columns={colmuns} rows={rows} showTable={true} returnData={getDataCard} />
                 :''
             }
 

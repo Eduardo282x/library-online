@@ -1,17 +1,9 @@
-import {FormControl,
-    TextField ,
-    InputAdornment,
-    Icon,
-    AccountCircleIcon,
-    IconButton,
-    VisibilityOffIcon,
-    VisibilityIcon,
-    Button,
-} from '../materialUI';
+import {FormControl,TextField ,InputAdornment,Icon,AccountCircleIcon,IconButton,VisibilityOffIcon,VisibilityIcon,Button,} from '../materialUI';
 import { useFormik } from 'formik';
 import {postDataApi} from '../../backend/BasicAxios';
 import {loginForm, validationSchema} from './login.data';
 import { useState } from 'react';
+import './login.css'
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
@@ -40,7 +32,7 @@ export const Login = () => {
     };
 
     return (
-        <div className="w-screen h-screen flex items-center justify-center text-center">
+        <div className="w-screen h-screen flex items-center justify-center text-center imgBackground">
             <form onSubmit={formik.handleSubmit} className="w-[30rem] h-[40rem] bg-white rounded-3xl gap-5 flex flex-col items-center justify-center">
                 <h1 className="font-semibold text-[#c8874e] text-4xl">Login</h1>
 

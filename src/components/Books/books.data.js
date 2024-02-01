@@ -22,7 +22,7 @@ export const colmuns = [
         filterOption: true
     },
     {
-        header:'Cantidad',
+        header:'Existencia',
         column: 'Amount',
         type: 'string',
         filterOption: false
@@ -86,7 +86,7 @@ export const formBook =[
         value: '',
     },
     {
-        label: 'Cantidad',
+        label: 'Existencia',
         input: true,
         type: 'text',
         name: 'Amount',

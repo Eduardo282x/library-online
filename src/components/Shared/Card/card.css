@@ -19,7 +19,7 @@
 
 .tableContent{
     /* margin-top: 2rem; */
-    max-height: 40vh;
+    max-height: 19rem;
     width: 100%;
     padding: 0 1rem ;
     overflow-y: scroll; 

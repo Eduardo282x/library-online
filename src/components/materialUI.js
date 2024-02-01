@@ -44,6 +44,7 @@ import AddIcon from '@mui/icons-material/Add';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Modal from '@mui/material/Modal';
+import Autocomplete from '@mui/material/Autocomplete';
 
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -80,6 +81,7 @@ export {
     SearchIcon,
     InputAdornment,
     FormControl,
+    Autocomplete,
     OutlinedInput,
     InputLabel,
     DeleteIcon,
