@@ -97,9 +97,9 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
             <Paper elevation={8} className="paperContent" square={false}>
                 <div className="headerContent">
                     <div className="flex items-center justify-center">
-                        <IconButton onClick={back}>
-                            <ArrowBackIcon/>
-                        </IconButton>
+                            <IconButton onClick={back}>
+                                <ArrowBackIcon/>
+                            </IconButton>
                         <h1 className="text-[#c8874e] font-bold text-[20px]">{title}</h1>
                     </div>
 
@@ -142,7 +142,7 @@ export const Card = ({ title, columns, rows, showTable, returnData }) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {dataFilter
+                            {dataFilter && dataFilter
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row, index) => (
                             <TableRow key={index}>

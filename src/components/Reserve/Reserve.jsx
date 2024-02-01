@@ -49,7 +49,7 @@ export const Reserve = () => {
                     if (bookIndex !== -1) {
                         updatedFormLibraryValues[bookIndex] = {
                             ...updatedFormLibraryValues[bookIndex],
-                            valueOptions: booksOptions
+                            options: booksOptions
                         };
                     }
                     return updatedFormLibraryValues;
@@ -63,6 +63,7 @@ export const Reserve = () => {
         getUsersApi();
         getBooksApi();
     }, []);
+
     const getDataCard = (data) => {
         if (data.action == "Add") {
             handleOpen();
@@ -75,6 +76,7 @@ export const Reserve = () => {
         }
         if (data.action == "AddApi") {
             addLibraryApi(data.data);
+            // console.log(data.data);
             handleClose();
         }
     };

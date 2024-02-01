@@ -1,11 +1,16 @@
 import PropTypes from "prop-types";
-import { Button, TextField, FormControl, InputLabel, Select, MenuItem} from '../../materialUI';
+import { Button, TextField, FormControl, InputLabel, Select, MenuItem, Autocomplete} from '../../materialUI';
 import { useFormik } from "formik";
 
 export const FormGenerator = ({ title, dataForm, bodySend, validationSchema, action, sendFather }) => {
 
     const submitBtn = (values) => {
         sendFather({ action: action, data: values });
+    }
+
+    const comple = (event, value, name) => {
+        formik.values[name] = value.value;
+        formik.value
     }
 
     const formik = useFormik({
@@ -35,9 +40,8 @@ export const FormGenerator = ({ title, dataForm, bodySend, validationSchema, act
                             helperText={formik.touched[formInput.name] && formik.errors[formInput.name]}
                             variant="outlined"
                         />
-                    ) :
-                    (
-                        formInput.select && (
+                    ) : formInput.select ?
+                        (
                             <FormControl fullWidth key={index}>
                                 <InputLabel>{formInput.label}</InputLabel>
                                 <Select
@@ -51,7 +55,22 @@ export const FormGenerator = ({ title, dataForm, bodySend, validationSchema, act
                                     ))}
                                 </Select>
                             </FormControl>
-                        )
+                        
+                    ) : (
+                        <Autocomplete
+                            // disablePortal
+                            freeSolo
+                            onChange={(event, value) => comple(event, value, formInput.name)}
+                            key={index} 
+                            options={formInput.options}
+                            sx={{ width: '100%' }}
+                            renderInput={(params) => <TextField 
+                                {...params} 
+                                name={formInput.name}
+                                value={formik.values[formInput.name]}
+                                label={formInput.label}
+                                />}
+                        />
                     )
                 ))}
 
